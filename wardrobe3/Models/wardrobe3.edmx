@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WardrobeDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accessories">
+          <Key>
+            <PropertyRef Name="AccessoriesID" />
+          </Key>
+          <Property Name="AccessoriesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="Season" Type="nvarchar" MaxLength="50" />
+          <Property Name="Occasion" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Bottoms">
+          <Key>
+            <PropertyRef Name="BottomsID" />
+          </Key>
+          <Property Name="BottomsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="Season" Type="nvarchar" MaxLength="50" />
+          <Property Name="Occasion" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Closet">
+          <Key>
+            <PropertyRef Name="ClosetID" />
+          </Key>
+          <Property Name="ClosetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TopsID" Type="int" Nullable="false" />
+          <Property Name="BottomsID" Type="int" Nullable="false" />
+          <Property Name="ShoesID" Type="int" Nullable="false" />
+          <Property Name="AccessoriesID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shoes">
+          <Key>
+            <PropertyRef Name="ShoesID" />
+          </Key>
+          <Property Name="ShoesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="Season" Type="nvarchar" MaxLength="50" />
+          <Property Name="Occasion" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tops">
+          <Key>
+            <PropertyRef Name="TopsID" />
+          </Key>
+          <Property Name="TopsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="Season" Type="nvarchar" MaxLength="50" />
+          <Property Name="Occassion" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Closet_Accessories">
+          <End Role="Accessories" Type="Self.Accessories" Multiplicity="1" />
+          <End Role="Closet" Type="Self.Closet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessories">
+              <PropertyRef Name="AccessoriesID" />
+            </Principal>
+            <Dependent Role="Closet">
+              <PropertyRef Name="AccessoriesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Closet_Bottoms">
+          <End Role="Bottoms" Type="Self.Bottoms" Multiplicity="1" />
+          <End Role="Closet" Type="Self.Closet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bottoms">
+              <PropertyRef Name="BottomsID" />
+            </Principal>
+            <Dependent Role="Closet">
+              <PropertyRef Name="BottomsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Closet_Shoes">
+          <End Role="Shoes" Type="Self.Shoes" Multiplicity="1" />
+          <End Role="Closet" Type="Self.Closet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shoes">
+              <PropertyRef Name="ShoesID" />
+            </Principal>
+            <Dependent Role="Closet">
+              <PropertyRef Name="ShoesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Closet_Tops">
+          <End Role="Tops" Type="Self.Tops" Multiplicity="1" />
+          <End Role="Closet" Type="Self.Closet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tops">
+              <PropertyRef Name="TopsID" />
+            </Principal>
+            <Dependent Role="Closet">
+              <PropertyRef Name="TopsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WardrobeDBModelStoreContainer">
+          <EntitySet Name="Accessories" EntityType="Self.Accessories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bottoms" EntityType="Self.Bottoms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Closet" EntityType="Self.Closet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shoes" EntityType="Self.Shoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tops" EntityType="Self.Tops" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Closet_Accessories" Association="Self.FK_Closet_Accessories">
+            <End Role="Accessories" EntitySet="Accessories" />
+            <End Role="Closet" EntitySet="Closet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Closet_Bottoms" Association="Self.FK_Closet_Bottoms">
+            <End Role="Bottoms" EntitySet="Bottoms" />
+            <End Role="Closet" EntitySet="Closet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Closet_Shoes" Association="Self.FK_Closet_Shoes">
+            <End Role="Shoes" EntitySet="Shoes" />
+            <End Role="Closet" EntitySet="Closet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Closet_Tops" Association="Self.FK_Closet_Tops">
+            <End Role="Tops" EntitySet="Tops" />
+            <End Role="Closet" EntitySet="Closet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WardrobeDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Accessory">
+          <Key>
+            <PropertyRef Name="AccessoriesID" />
+          </Key>
+          <Property Name="AccessoriesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Season" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Occasion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Closets" Relationship="Self.FK_Closet_Accessories" FromRole="Accessories" ToRole="Closet" />
+        </EntityType>
+        <EntityType Name="Bottom">
+          <Key>
+            <PropertyRef Name="BottomsID" />
+          </Key>
+          <Property Name="BottomsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Season" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Occasion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Closets" Relationship="Self.FK_Closet_Bottoms" FromRole="Bottoms" ToRole="Closet" />
+        </EntityType>
+        <EntityType Name="Closet">
+          <Key>
+            <PropertyRef Name="ClosetID" />
+          </Key>
+          <Property Name="ClosetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TopsID" Type="Int32" Nullable="false" />
+          <Property Name="BottomsID" Type="Int32" Nullable="false" />
+          <Property Name="ShoesID" Type="Int32" Nullable="false" />
+          <Property Name="AccessoriesID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accessory" Relationship="Self.FK_Closet_Accessories" FromRole="Closet" ToRole="Accessories" />
+          <NavigationProperty Name="Bottom" Relationship="Self.FK_Closet_Bottoms" FromRole="Closet" ToRole="Bottoms" />
+          <NavigationProperty Name="Sho" Relationship="Self.FK_Closet_Shoes" FromRole="Closet" ToRole="Shoes" />
+          <NavigationProperty Name="Top" Relationship="Self.FK_Closet_Tops" FromRole="Closet" ToRole="Tops" />
+        </EntityType>
+        <EntityType Name="Sho">
+          <Key>
+            <PropertyRef Name="ShoesID" />
+          </Key>
+          <Property Name="ShoesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Season" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Occasion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Closets" Relationship="Self.FK_Closet_Shoes" FromRole="Shoes" ToRole="Closet" />
+        </EntityType>
+        <EntityType Name="Top">
+          <Key>
+            <PropertyRef Name="TopsID" />
+          </Key>
+          <Property Name="TopsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Season" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Occassion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Closets" Relationship="Self.FK_Closet_Tops" FromRole="Tops" ToRole="Closet" />
+        </EntityType>
+        <Association Name="FK_Closet_Accessories">
+          <End Role="Accessories" Type="Self.Accessory" Multiplicity="1" />
+          <End Role="Closet" Type="Self.Closet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessories">
+              <PropertyRef Name="AccessoriesID" />
+            </Principal>
+            <Dependent Role="Closet">
+              <PropertyRef Name="AccessoriesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Closet_Bottoms">
+          <End Role="Bottoms" Type="Self.Bottom" Multiplicity="1" />
+          <End Role="Closet" Type="Self.Closet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bottoms">
+              <PropertyRef Name="BottomsID" />
+            </Principal>
+            <Dependent Role="Closet">
+              <PropertyRef Name="BottomsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Closet_Shoes">
+          <End Role="Shoes" Type="Self.Sho" Multiplicity="1" />
+          <End Role="Closet" Type="Self.Closet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shoes">
+              <PropertyRef Name="ShoesID" />
+            </Principal>
+            <Dependent Role="Closet">
+              <PropertyRef Name="ShoesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Closet_Tops">
+          <End Role="Tops" Type="Self.Top" Multiplicity="1" />
+          <End Role="Closet" Type="Self.Closet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tops">
+              <PropertyRef Name="TopsID" />
+            </Principal>
+            <Dependent Role="Closet">
+              <PropertyRef Name="TopsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WardrobeDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accessories" EntityType="Self.Accessory" />
+          <EntitySet Name="Bottoms" EntityType="Self.Bottom" />
+          <EntitySet Name="Closets" EntityType="Self.Closet" />
+          <EntitySet Name="Shoes" EntityType="Self.Sho" />
+          <EntitySet Name="Tops" EntityType="Self.Top" />
+          <AssociationSet Name="FK_Closet_Accessories" Association="Self.FK_Closet_Accessories">
+            <End Role="Accessories" EntitySet="Accessories" />
+            <End Role="Closet" EntitySet="Closets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Closet_Bottoms" Association="Self.FK_Closet_Bottoms">
+            <End Role="Bottoms" EntitySet="Bottoms" />
+            <End Role="Closet" EntitySet="Closets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Closet_Shoes" Association="Self.FK_Closet_Shoes">
+            <End Role="Shoes" EntitySet="Shoes" />
+            <End Role="Closet" EntitySet="Closets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Closet_Tops" Association="Self.FK_Closet_Tops">
+            <End Role="Tops" EntitySet="Tops" />
+            <End Role="Closet" EntitySet="Closets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WardrobeDBModelStoreContainer" CdmEntityContainer="WardrobeDBEntities">
+          <EntitySetMapping Name="Accessories">
+            <EntityTypeMapping TypeName="WardrobeDBModel.Accessory">
+              <MappingFragment StoreEntitySet="Accessories">
+                <ScalarProperty Name="AccessoriesID" ColumnName="AccessoriesID" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Season" ColumnName="Season" />
+                <ScalarProperty Name="Occasion" ColumnName="Occasion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bottoms">
+            <EntityTypeMapping TypeName="WardrobeDBModel.Bottom">
+              <MappingFragment StoreEntitySet="Bottoms">
+                <ScalarProperty Name="BottomsID" ColumnName="BottomsID" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Season" ColumnName="Season" />
+                <ScalarProperty Name="Occasion" ColumnName="Occasion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Closets">
+            <EntityTypeMapping TypeName="WardrobeDBModel.Closet">
+              <MappingFragment StoreEntitySet="Closet">
+                <ScalarProperty Name="ClosetID" ColumnName="ClosetID" />
+                <ScalarProperty Name="TopsID" ColumnName="TopsID" />
+                <ScalarProperty Name="BottomsID" ColumnName="BottomsID" />
+                <ScalarProperty Name="ShoesID" ColumnName="ShoesID" />
+                <ScalarProperty Name="AccessoriesID" ColumnName="AccessoriesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shoes">
+            <EntityTypeMapping TypeName="WardrobeDBModel.Sho">
+              <MappingFragment StoreEntitySet="Shoes">
+                <ScalarProperty Name="ShoesID" ColumnName="ShoesID" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Season" ColumnName="Season" />
+                <ScalarProperty Name="Occasion" ColumnName="Occasion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tops">
+            <EntityTypeMapping TypeName="WardrobeDBModel.Top">
+              <MappingFragment StoreEntitySet="Tops">
+                <ScalarProperty Name="TopsID" ColumnName="TopsID" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Season" ColumnName="Season" />
+                <ScalarProperty Name="Occassion" ColumnName="Occassion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
